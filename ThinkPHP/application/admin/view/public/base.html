@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>{block name="title"}{/block}</title>
+<meta name="keywords" content={block name="keywords"}{/block} />
+<meta name="description" content={block name="description"}{/block} />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- basic styles -->
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/font-awesome.min.css" />
+
+<!-- ace styles -->
+<link rel="stylesheet" href="__STATIC__/admin/css/ace.min.css" />
+
+<!--&lt;!&ndash; ace settings handler &ndash;&gt;-->
+<script src="__STATIC__/admin/js/ace-extra.min.js"></script>
+<script src="__STATIC__/js/jquery-2.2.0.js"></script>
+
+</head>
+
+<body>
+
+<!--页面顶部-->
+<div class="navbar navbar-default" id="navbar">
+	<script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<div class="navbar-header pull-left">
+			<a href="#" class="navbar-brand">
+				<small>
+					<i class="icon-leaf"></i>
+					Ace Admin
+				</small>
+			</a><!-- /.brand -->
+		</div><!-- /.navbar-header -->
+
+		<div class="navbar-header pull-right" role="navigation">
+			<ul class="nav ace-nav">
+				<li class="light-blue">
+					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+						<img class="nav-user-photo" src="__ROOT__/static/admin/avatars/user.jpg" alt="Jason's Photo" />
+						<span class="user-info">
+							<small>Welcome,</small>{$Think.session.admin.name}
+						</span>
+						<i class="icon-caret-down"></i>
+					</a>
+
+					<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<li><a href="#"><i class="icon-cog"></i>设置</a></li>
+						<li><a href="#"><i class="icon-user"></i>个人资料</a></li>
+						<li class="divider"></li>
+						<li><a href="{:url('admin/login/logout')}"><i class="icon-off"></i>退出</a></li>
+					</ul>
+				</li>
+			</ul><!-- /.ace-nav -->
+		</div><!-- /.navbar-header -->
+	</div><!-- /.container -->
+</div>
+
+<!--左侧导航栏-->
+<div class="main-container" id="main-container">
+	<script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+	</script>
+
+	<div class="main-container-inner">
+		<a class="menu-toggler" id="menu-toggler" href="#">
+			<span class="menu-text"></span>
+		</a>
+
+		<div class="sidebar" id="sidebar">
+			<script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+			</script>
+
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<button class="btn btn-success"><i class="icon-signal"></i></button>
+					<button class="btn btn-info"><i class="icon-pencil"></i></button>
+					<button class="btn btn-warning"><i class="icon-group"></i></button>
+					<button class="btn btn-danger"><i class="icon-cogs"></i></button>
+				</div>
+				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span>
+					<span class="btn btn-info"></span>
+					<span class="btn btn-warning"></span>
+					<span class="btn btn-danger"></span>
+				</div>
+			</div>
+
+			{include file="public/nav-list"}
+
+			<!--左侧导航栏下端隐藏按钮-->
+			<div class="sidebar-collapse" id="sidebar-collapse">
+				<i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+				   data-icon2="icon-double-angle-right"></i>
+			</div>
+			<script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+			</script>
+		</div>
+
+		{block name="main-content"}{/block}
+
+	</div><!-- /.main-container-inner -->
+</div><!-- /.main-container -->
+
+</body>
+
+<script src="__ROOT__/static/admin/js/bootstrap.min.js"></script>
+
+<!-- ace scripts -->
+<script src="__ROOT__/static/admin/js/ace-elements.min.js"></script>
+<script src="__ROOT__/static/admin/js/ace.min.js"></script>
+</html>

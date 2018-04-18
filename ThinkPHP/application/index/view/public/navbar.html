@@ -1,0 +1,11 @@
+<!--导航开始-->
+<div id="navigation">
+	<ul class="clear">
+		
+		<li><a href="{:url('/')}"  {if condition="request()->param('id')==''"}class="current"{/if}>首页</a></li>
+	{foreach $naviCate as $item}
+		<li><a href="{:url('index/index/catenews',['id' => $item.id])}" {if condition="request()->param('id')==$item.id"}class="current"{/if}>{$item.catename}</a></li>
+	{/foreach}	
+	</ul>
+</div>
+<!--导航结束-->

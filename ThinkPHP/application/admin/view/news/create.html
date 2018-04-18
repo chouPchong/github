@@ -1,0 +1,97 @@
+{extend name="public/base"}
+{block name="title"}新闻添加{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="#">新闻</a></li>
+			<li class="active">新闻添加</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				新闻添加
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<form class="form-horizontal" role="form" action="{:url('admin/news/save')}" method="post" enctype="multipart/form-data">
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"> 新闻标题 </label>
+					<div class="col-sm-9">
+						<input type="text" name="subject" placeholder=" 请输入新闻标题" class="col-xs-10 col-sm-5"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"> 新闻类别 </label>
+					<div class="col-sm-9">
+						<select class="col-xs-10 col-sm-5" name="category_id">
+							{foreach $cate_records as $cate_record}
+							<option value="{$cate_record.id}">{:str_repeat('--',$cate_record.level)}{$cate_record.catename}</option>
+							{/foreach}
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">合作伙伴</label>
+					<div class="col-sm-9">
+						<select class="col-xs-10 col-sm-5" id="form-field-select-1" name="partner_id">
+							<option value="">无</option>
+							{foreach $part_records as $part_record}
+							<option value="{$part_record.id}">{$part_record.name}</option>
+							{/foreach}
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"> 新闻缩略图 </label>
+					<div class="col-sm-9">
+						<input type="file" name="thumb" class="col-xs-10 col-sm-5"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"> 新闻内容</label>
+					<div class="col-sm-9">
+						<textarea name="content" id="editor" type="text/plain" style="width:800px;height:370px;"></textarea>
+					</div>
+				</div>
+
+
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="submit">
+							<i class="icon-ok bigger-110"></i>
+							提交
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="icon-undo bigger-110"></i>
+							重置
+						</button>
+					</div>
+				</div>
+
+				</form>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

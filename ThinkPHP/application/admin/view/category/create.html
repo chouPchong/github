@@ -1,0 +1,70 @@
+{extend name="public/base"}
+{block name="title"}新闻分类添加{/block}
+{block name="main-content"}
+<div class="main-content" style="overflow: auto">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="{:url('admin/category/index')}">新闻类别</a></li>
+			<li class="active">添加类别</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				新闻类别添加
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<form class="form-horizontal" role="form" action="{:url('admin/category/save')}" method="post">
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right"> 分类名称 </label>
+					<div class="col-sm-9">
+						<input type="text" name="catename" placeholder=" 请输入类别名称" class="col-xs-10 col-sm-5"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">顶级类别</label>
+					<div class="col-sm-9">
+						<select class="col-xs-10 col-sm-5" id="form-field-select-1" name="pid">
+							<option value="0">顶级类别</option>
+							{foreach $records as $record}
+							<option value="{$record.id}">{:str_repeat('--', $record.level)}{$record.catename}</option>
+							{/foreach}
+						</select>
+					</div>
+				</div>
+
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="submit">
+							<i class="icon-ok bigger-110"></i>
+							提交
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="icon-undo bigger-110"></i>
+							重置
+						</button>
+					</div>
+				</div>
+				</form>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

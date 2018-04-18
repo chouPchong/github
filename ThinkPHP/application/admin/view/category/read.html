@@ -1,0 +1,59 @@
+{extend name="public/base"}
+{block name="title"}新闻分类详情{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="{:url('admin/category/index')}">新闻类别</a></li>
+			<li class="active">新闻类别详情</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				新闻类别查看
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<!--新闻详情开始-->
+		<table border="1" cellspacing="1" cellpadding="5" width="800px">
+			<tr>
+				<td width="150px">序号:</td>
+				<td>{$cate_record.id}</td>
+			</tr>
+			<tr>
+				<td>类别名称:</td>
+				<td>{$cate_record.catename}</td>
+			</tr>
+			<tr>
+				<td>所属父类:</td>
+				<td>{empty name="$top_record.catename"} 顶级 {else /} {$top_record.catename} {/empty}</td>
+			</tr>
+			<tr>
+				<td>所属新闻:</td>
+				<td>
+					{empty name="$top_record.catename"}
+						类别下无新闻
+					{else /}
+						{foreach $cate_record.news as $new}
+						<li><a href="{:url('admin/news/read',['id' => $new.id])}">{$new.subject}</a></li>
+						{/foreach}
+					{/empty}
+				</td>
+			</tr>
+		</table>
+		<!--新闻详情结束-->
+
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

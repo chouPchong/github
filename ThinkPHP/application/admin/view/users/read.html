@@ -1,0 +1,60 @@
+{extend name="public/base"}
+{block name="title"}用户详情{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="#">用户</a></li>
+			<li class="active">用户详情</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				用户查看
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<!--用户详情开始-->
+		<table border="1" cellspacing="1" cellpadding="5" width="800px">
+			<tr>
+				<td width="150px">用户名称:</td>
+				<td>{$record.username}</td>
+			</tr>
+			<tr>
+				<td>用户昵称:</td>
+				<td>{$record.nickname}</td>
+			</tr>
+			<tr>
+				<td>创建时间:</td>
+				<td>{$record.addtime|date="Y年m月d日 H:i",###}</td>
+			</tr>
+			<tr>
+				<td>用户头像:</td>
+				<td><img src="__ROOT__/static/user_image/{$record.face}"/></td>
+			</tr>
+			<tr>
+				<td>评论内容:</td>
+				<td>
+					<ul>
+						{foreach $record.comment as $item}
+						<li><a href="{:url('admin/comment/read', ['id' => $item.id])}">{$item.content}</a></li>
+						{/foreach}
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<!--用户详情结束-->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

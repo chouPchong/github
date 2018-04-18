@@ -1,0 +1,113 @@
+{extend name="public/base"}
+{block name="title"}用户列表{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="#">用户</a></li>
+			<li class="active">用户管理</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				用户管理
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<!--新闻类别列表-->
+		<div class="row">
+			<div class="col-xs-12">
+				<h3 class="header smaller lighter blue">用户列表</h3>
+
+				<div class="nav-search" id="nav-search">
+					<form action="{:url('admin/users/index')}" method="get" class="form-search">
+						<span class="input-icon">
+							<input type="text" name="keywords" value="{$keywords}" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"/>
+							<i class="icon-search nav-search-icon"></i>
+						</span>
+					</form>
+				</div><!-- #nav-search -->
+
+				<div class="table-header">用户管理列表</div>
+
+				<div class="table-responsive">
+					<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+						<thead>
+						<tr>
+							<th class="center"><label><input type="checkbox" class="ace"/><span class="lbl"></span></label></th>
+							<th>序号</th>
+							<th>用户名</th>
+							<th>昵称</th>
+							<th></th>
+						</tr>
+						</thead>
+
+						<tbody>
+
+						{foreach $records as $record}
+						<tr>
+							<td class="center"><label><input type="checkbox" class="ace"/><span class="lbl"></span></label></td>
+							<td>{$record.id}</td>
+							<td><a href="{:url('admin/users/read', ['id' => $record.id])}">{$record.username}</a></td>
+							<td><a href="{:url('admin/users/read', ['id' => $record.id])}">{$record.nickname}</a></td>
+							<td>
+								<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+									<a class="blue" href="{:url('admin/users/read', ['id' => $record.id])}">
+										<i class="icon-zoom-in bigger-130"></i>
+									</a>
+
+									<a class="red" href="{:url('admin/users/delete', ['id' => $record.id])}">
+										<i class="icon-trash bigger-130" onclick="return window.confirm('确认要删除吗?')"></i>
+									</a>
+								</div>
+
+								<div class="visible-xs visible-sm hidden-md hidden-lg">
+									<div class="inline position-relative">
+										<button class="btn btn-minier btn-yellow dropdown-toggle"
+												data-toggle="dropdown">
+											<i class="icon-caret-down icon-only bigger-120"></i>
+										</button>
+
+										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+											<li>
+												<a href="" class="tooltip-info" data-rel="tooltip" title="View">
+												<span class="blue">
+													<i class="icon-zoom-in bigger-120"></i>
+												</span>
+												</a>
+											</li>
+
+											<li>
+												<a href="" class="tooltip-error" data-rel="tooltip" title="Delete">
+												<span class="red">
+													<i class="icon-trash bigger-120"></i>
+												</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</td>
+						</tr>
+						{/foreach}
+
+						</tbody>
+					</table>
+					<div>共{$records->lastPage()}页/第{$records->currentPage()}页</div>
+					{$records->appends(request()->get())->render()}
+				</div><!-- /.table -->
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

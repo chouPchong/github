@@ -1,0 +1,46 @@
+{extend name="public/base"}
+
+{block name="main"}
+
+
+<div class="section clear">
+	<div class="side-left-680">
+		<div>
+			{if condition="empty($searchNews) eq true"}
+			没有查出该关键词新闻,建议重新搜索!
+			{else /}
+			{foreach $searchNews as $new}
+			<div class="news-list-item clear">
+				<div class="news-list-item-pic"><a href="{:url('index/index/read', ['id' => $new.id])}">
+					<img src="__ROOT__/static/news_image/thumb/{$new.thumb}" alt=""/></a></div>
+				<div class="news-list-item-txt">
+					<h1><a href="{:url('index/index/read', ['id' => $new.id])}">{$new.subject|mb_substr=0,30}</a></h1>
+					<p>{$new.content|strip_tags|mb_substr=0,80}...</p>
+				</div>
+			</div>
+			{/foreach}
+			共{$searchNews->lastPage()}页 | 第{$searchNews->currentPage()}页
+			<div class="page-list clear">
+				{$searchNews->render()}
+			</div>
+			{/if}
+		</div>
+	</div>
+	<div class="side-right-300">
+		<h3 class="hot-title">24小时排行榜</h3>
+		<ol class="list-hot">
+			{foreach $hourNews as $key => $new}
+			{if condition="$key<3"}
+			<li class="hot"><span class="top-num num3">0{$key+1}</span>
+				<a href="{:url('index/index/read', ['id' => $new.id])}">{$new.subject|mb_substr=0,20}</a></li>
+			{else/}
+			<li><span class="top-num">{if condition="$key<9"}0{$key+1}{else/}{$key+1}{/if}</span>
+				<a href="{:url('index/index/read', ['id' => $new.id])}">{$new.subject|mb_substr=0,20}</a></li>
+			{/if}
+			{/foreach}
+		</ol>
+
+	</div>
+</div>
+
+{/block}

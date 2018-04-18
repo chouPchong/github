@@ -1,0 +1,133 @@
+<ul class="nav nav-list" >
+	<li class="active" id="controlMenu">
+		<a href="{:url('admin/index/index')}">
+			<i class="icon-dashboard"></i>
+			<span class="menu-text"> 控制台 </span>
+		</a>
+	</li>
+
+	<li>
+		<a href="#" class="dropdown-toggle">
+			<i class="icon-edit"></i>
+			<span class="menu-text"> 新闻表 </span>
+			<b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="{:url('admin/news/create')}">
+					<i class="icon-double-angle-right"></i>
+					添加新闻
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/news/index')}">
+					<i class="icon-double-angle-right"></i>
+					新闻管理
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/news/recycle')}">
+					<i class="icon-double-angle-right"></i>
+					新闻回收站
+				</a>
+			</li>
+		</ul>
+	</li>
+
+	{if condition="session('admin.level') == 2 || session('admin.level') == 3"}
+	<li>
+		<a href="#" class="dropdown-toggle">
+			<i class="icon-edit"></i>
+			<span class="menu-text"> 新闻类别 </span>
+			<b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="{:url('admin/category/create')}">
+					<i class="icon-double-angle-right"></i>
+					添加新闻类别
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/category/index')}">
+					<i class="icon-double-angle-right"></i>
+					新闻类别管理
+				</a>
+			</li>
+		</ul>
+	</li>
+	{/if}
+
+	<li>
+		<a href="#" class="dropdown-toggle">
+			<i class="icon-edit"></i>
+			<span class="menu-text"> 用户及评论  </span>
+
+			<b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="{:url('admin/users/index')}">
+					<i class="icon-double-angle-right"></i>
+					用户管理
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/comment/index')}">
+					<i class="icon-double-angle-right"></i>
+					用户评论
+				</a>
+			</li>
+		</ul>
+	</li>
+
+	{if condition="session('admin.level') == 2 || session('admin.level') == 3"}
+	<li>
+		<a href="#" class="dropdown-toggle">
+			<i class="icon-edit"></i>
+			<span class="menu-text"> 合作伙伴 </span>
+
+			<b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="{:url('admin/partner/create')}">
+					<i class="icon-double-angle-right"></i>
+					添加合作伙伴
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/partner/index')}">
+					<i class="icon-double-angle-right"></i>
+					合作伙伴管理
+				</a>
+			</li>
+		</ul>
+	</li>
+	{/if}
+
+	{if condition="session('admin.level') == 3"}
+	<li>
+		<a href="" class="dropdown-toggle">
+			<i class="icon-edit"></i>
+			<span class="menu-text"> 管理员 </span>
+
+			<b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="{:url('admin/admin/add')}">
+					<i class="icon-double-angle-right"></i>
+					添加管理员
+				</a>
+			</li>
+			<li>
+				<a href="{:url('admin/admin/index')}">
+					<i class="icon-double-angle-right"></i>
+					管理员管理
+				</a>
+			</li>
+		</ul>
+	</li>
+	{/if}
+</ul>

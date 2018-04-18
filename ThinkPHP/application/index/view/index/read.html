@@ -1,0 +1,71 @@
+{extend name="public/base"}
+{block name="main"}
+<div class="section">
+	<h1 class="article-title">{$record.subject}</h1>
+	<div class="clear">
+		<div class="side-left-680" id="article">
+			<div class="article-info">{$record.addtime|date="Y年m月d日 H:i",###}<a
+					href="{:url('index/comment/read', ['id' => $record.id])}" class="comment-count-plus">评论({$record.commentnums})</a>
+			</div>
+			<div class="article-body">
+				{$record.content}
+			</div>
+			<div id="comment">
+				<p class="comment-count"><a href="{:url('index/comment/read', ['id' => $record.id])}">已有<span class="comment-count-plus">{$record.commentnums}</span>条评论，共<span>{$record.readtimes}人</span>参与</a></p>
+				<textarea class="comment-content" id="comment-content" placeholder="请输入评论内容"></textarea>
+				<div class="comment-user-cont clear">
+					{if condition="$Think.session.user.nickname eq ''"}
+					<div class="comment-user-username"><input type="text" name="username" id="username" class="comment-input" placeholder="请输入账号"/></div>
+					<div class="comment-user-password"><input type="password" name="password" id="password" class="comment-input" placeholder="请输入密码"/></div>
+					<div class="comment-user-link">
+						<input type="checkbox" name="remember" checked="checked" value="1"/> 下次自动登录
+						<a href="javascript:void(0)" id="login-button">登录</a>
+					</div>
+					<span style="color:#f00; margin-left: 20px;">评论需登录</span>
+					{else/}
+					<div class="comment-user-logined">
+						<span><a href="#">{$Think.session.nickname}</a></span>
+						<span><a href="{:url('index/users/logout')}">退出</a></span>
+						<a href="javascript:void(0)" class="comment-publishing-btn" id="send-button" style="cursor: pointer;">发布</a>
+					</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+		<div class="side-right-300">
+			<h3 class="hot-title">24小时排行榜</h3>
+			<ol class="list-hot">
+				{foreach $hourNews as $key => $new}
+				{if condition="$key<3"}
+				<li class="hot"><span class="top-num num3">0{$key+1}</span>
+					<a href="{:url('index/index/read', ['id' => $new.id])}" >{$new.subject|mb_substr=0,20}</a>
+				</li>
+				{else/}
+				<li><span class="top-num">{if condition="$key<9"}0{$key+1}{else/}{$key+1}{/if}</span><a
+						href="{:url('index/index/read', ['id' => $new.id])}" >{$new.subject|mb_substr=0,20}</a>
+				</li>
+				{/if}
+				{/foreach}
+			</ol>
+		</div>
+	</div>
+</div>
+<!--评论区登录评论-->
+<script src="__JS__/jquery-2.2.0.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#login-button').click(function () {
+            $.post('{:url("index/users/login")}', 'username=' + $('#username').val() + '&password=' + $('#password').val(), function () {
+                location.reload();
+            });
+        });
+        $('#send-button').click(function () {
+            $.post('{:url("index/comment/save")}', 'content=' + $('#comment-content').val() + '&news_id={:Request()->param("id")}', function () {
+                $('#comment-content').val('');
+                var commentnums = parseInt($('.comment-count-plus').last().text()) + 1;
+                $('.comment-count-plus').text(commentnums);
+            });
+        });
+    });
+</script>
+{/block}

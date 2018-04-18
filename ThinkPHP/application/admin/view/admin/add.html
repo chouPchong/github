@@ -1,0 +1,76 @@
+{extend name="public/base"}
+{block name="title"}管理员添加{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li><a href="#">管理员</a></li>
+			<li class="active">添加管理员</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				管理员添加
+				<small><i class="icon-double-angle-right"></i></small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" role="form" action="{:url('admin/admin/save')}" method="post">
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 管理员名称 </label>
+						<div class="col-sm-9">
+							<input type="text" name="username" placeholder="请输入管理员名称" class="col-xs-10 col-sm-5"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 管理员密码</label>
+						<div class="col-sm-9">
+							<input type="password" name="password" placeholder="请输入密码" class="col-xs-10 col-sm-5"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 管理员等级 </label>
+						<div class="col-sm-9">
+							<input type="radio" name="level" id="l1" value="1"/>
+							<label for="l1"> 1 </label>
+							<input type="radio" name="level" id="l2" value="2"/>
+							<label for="l2"> 2 </label>
+							<input type="radio" name="level" id="l3" value="3"/>
+							<label for="l3"> 3 </label>
+						</div>
+					</div>
+
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info" type="submit">
+								<i class="icon-ok bigger-110"></i>
+								提交
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="icon-undo bigger-110"></i>
+								重置
+							</button>
+						</div>
+					</div>
+				</form>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}

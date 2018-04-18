@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>新闻视界</title>
+	<link href="__CSS__/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="__CSS__/reset.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="__CSS__/layout.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="__CSS__/common.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="__CSS__/tab.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+<!-- 通用顶部导航开始-->
+<div id="top-navi-wrap">
+	<div class="clearfix" id="top-navi">
+		<div class="side-left">
+			<a href="#">巴西世界杯一再爆冷 卫冕冠军西班牙出局</a>
+			<a href="#">瑞士人为啥最幸福</a>　
+			<a href="#">中国病人庞麦郎</a>
+		</div>
+		<div class="side-right">
+			<div class="top-nav-select-title">
+				{if condition="$Think.session.user.nickname eq ''"}
+				<a href="{:url('index/users/login')}" target="_blank" class="top-nav-login-title">登录</a>
+				<a href="{:url('index/users/register')}" target="_blank">免费注册</a>
+				{else/}
+				<span>您好，<a href="{:url('index/users/index', ['id' => session('user.userid')])}" class="current-user">{$Think.session.user.nickname}</a></span>
+				<a href="{:url('index/users/logout')}">退出</a>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 通用顶部导航结束 -->
+<!--header start-->
+<div class="clear" id="header">
+		<div id="logo"><a href="#" title="换一个角度看新闻"></a></div>
+		<!--<div id="search-bar">-->
+			<!--<form name="search-form" action="" method="get">-->
+				<!--<input type="text" name="keywords" id="keywords" value="党报连发治军铁腕新政"/>-->
+				<!--<input type="submit" value="" id="search-submit-button"/>-->
+			<!--</form>-->
+		<!--</div>-->
+</div>
+<!--header end-->
+<!--导航开始-->
+<div id="navigation">
+	<ul class="clear">
+		<li><a href="{:url('/')}" {if condition="request()->param('id')==''"}class="current"{/if}>首页</a></li>
+		{foreach $naviCate as $item}
+		<li><a href="{:url('index/index/catenews',['id' => $item.id)]}" {if condition="request()->param('id')==$item.id"}class="current"{/if}>{$item.catename}</a></li>
+		{/foreach}
+	</ul>
+</div>
+<!--导航结束-->
+<div class="section container">
+	<h1 class="article-title">用户中心</h1>
+		<!--用户详情开始-->
+		<div class="container" style="text-align: center">
+			<table border="0" cellspacing="1" cellpadding="5" width="400px" style="font-size: 14px; line-height: 40px;">
+				<tr>
+					<td width="150px"><b>用户名称: </b></td>
+					<td>{$user_record.username}</td>
+					<td width="50px"></td>
+				</tr>
+				<tr>
+					<td><b>用户昵称: </b></td>
+					<td>{$user_record.nickname}</td>
+					<td><a href="{:url('index/users/edit', ['id' => $user_record.id])}">修改</a></td>
+				</tr>
+				<tr>
+					<td><b>创建时间: </b></td>
+					<td>{$user_record.addtime|date="Y年m月d日 H:i",###}</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td valign="top"><b>用户头像: </b></td>
+					<td style="padding-top: 20px;"><img src="__ROOT__/static/user_image/{$user_record.face}" width="100px"/></td>
+					<td><a href="{:url('index/users/edi/', ['id' => $user_record.id])}">修改</a></td>
+				</tr>
+			</table>
+		</div>
+		<!--用户详情结束-->
+		<div style="height: 50px;"></div>
+		<!--用户评论结束-->
+		<div class="container">
+			<h3 style="font-size: 24px">参与的新闻评论</h3>
+			<ol class="list-hot">
+				{foreach $user_comments as $key => $comment}
+				<li>&nbsp;&nbsp;新闻标题: <a href="{:url('index/index/read', ['id' => $comment.getNewsByComment.id])}">{$comment.getNewsByComment.subject|mb_substr=###,0,50}</a></li>
+				<li>&nbsp;&nbsp;评论内容: <a href="#">{$comment.content}</a></li>
+				<hr>
+				{/foreach}
+			</ol>
+			<p>共{$user_comments->lastPage()}页 / 第{$user_comments->currentPage()}页</p>
+			<p>{$user_comments->render()}</p>
+		</div>
+		<!--用户评论结束-->
+</div>
+<!--版权区 start-->
+<!--版权区 start-->
+<div class="section footer">
+	<p>24小时客户服务热线：4000000000 010-82623378 <a href="#">常见问题解答</a> <a target="_blank" href="http://www.12377.cn/">互联网违法和不良信息举报</a></p>
+	<p><a target="_blank" href="#">新闻中心意见反馈留言板</a></p>
+	<p><a href="#">公司简介</a> | <a href="#">关于我们</a> | <a href="#">广告服务</a> | <a href="#">联系我们</a> | <a href="#">招聘信息</a> | <a href="#">网站律师</a> |  <a href="#">通行证注册</a> | <a href="#">产品答疑</a></p>
+	<p>Copyright &copy; 1989-2018 ONLINE Corporation, Imporving Little Everyday</p>
+</div>
+<!--版权区 end-->
+
+</body>
+</html>

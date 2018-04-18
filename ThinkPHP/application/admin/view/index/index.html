@@ -1,0 +1,70 @@
+﻿{extend name="public/base"}
+{block name="title"}后台首页{/block}
+{block name="main-content"}
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {
+            }
+		</script>
+
+		<ul class="breadcrumb">
+			<li><i class="icon-home home-icon"></i><a href="{:url('admin/index/index')}">首页</a></li>
+			<li class="active">控制台</li>
+		</ul><!-- .breadcrumb -->
+
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				控制台
+				<small><i class="icon-double-angle-right"></i>查看</small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+
+				<div class="alert alert-block alert-success">
+					<button type="button" class="close" data-dismiss="alert">
+						<i class="icon-remove"></i>
+					</button>
+
+					<i class="icon-ok green"></i>
+
+					欢迎使用
+					<strong class="green">
+						Ace后台管理系统
+						<small>(v1.2)</small>
+					</strong>
+					,轻量级好用的后台管理系统模版.
+				</div>
+				<table border="0" cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<td>操作系统</td>
+						<td>{$Think.const.PHP_OS}</td>
+					</tr>
+					<tr>
+						<td>PHP版本</td>
+						<td>{$Think.const.PHP_VERSION}</td>
+					</tr>
+					<tr>
+						<td>ThinkPHP版本</td>
+						<td>{$Think.const.THINK_VERSION}</td>
+					</tr>
+					<tr>
+						<td>安装路径</td>
+						<td>{$Think.const.ROOT_PATH}</td>
+					</tr>
+				</table>
+				<!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+{/block}
+
